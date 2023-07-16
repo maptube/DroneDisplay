@@ -42,7 +42,7 @@ scene.add( ground );
 const geomOrigin = new THREE.BoxGeometry(1,1,1);
 const matOrigin = new THREE.MeshBasicMaterial( { color: 0xff0000 });
 const origin = new THREE.Mesh( geomOrigin, matOrigin );
-scene.add( origin ); //zero, zero, zero - box is going to be partly underground though as 1x1x1
+//scene.add( origin ); //zero, zero, zero - box is going to be partly underground though as 1x1x1
 
 
 //const geometry = new THREE.SphereGeometry( 1, 16, 8 ).toNonIndexed(); //we need per face normals not indexed
@@ -73,32 +73,64 @@ for (var i=0; i<100; i++)
 	//swarm.drones[i].setDeltaTarget(0,5,0);
 }
 //swarm.setPattern(DronePatterns.f,-5,3,0);
-let pat1 = function() {
+let pat_forward = function() {
+	console.log("hello from function 1!");
+	for (let i=0; i<swarm.drones.length; i++) {
+		if (swarm.drones[i].lightIsOn) {
+			swarm.drones[i].setDeltaTarget(0,0,4);
+		}
+	}
+}
+let pat1_kala = function() {
 	console.log("hello from function 1!");
 	let pat = swarm.compositePattern([
-	//DronePatterns.f, DronePatterns.space2,
-	//DronePatterns.l, DronePatterns.space2,
-	//DronePatterns.o, DronePatterns.space2,
-	//DronePatterns.r, DronePatterns.space2,
-	//DronePatterns.a, DronePatterns.space2,
-	DronePatterns.PHI, DronePatterns.space2,
-	DronePatterns.LAMBDA, DronePatterns.space2,
-	DronePatterns.OMEGA, DronePatterns.space2,
-	DronePatterns.RHO, DronePatterns.space2,
-	DronePatterns.alpha
-]);
-swarm.setPattern(pat,-5,3,0);
+		DronePatterns.KAPPA, DronePatterns.space2,
+		DronePatterns.alpha, DronePatterns.space2,
+		DronePatterns.lambda, DronePatterns.space2,
+		DronePatterns.alpha
+	]);
+	swarm.setPattern(pat,-5,3,0);
 }
-let pat2 = function() {
+let pat2_genethlia = function() {
+	console.log("hello from function 1!");
+	let pat = swarm.compositePattern([
+		DronePatterns.GAMMA, DronePatterns.space2,
+		DronePatterns.epsilon, DronePatterns.space2,
+		DronePatterns.ni, DronePatterns.space2,
+		DronePatterns.epsilon, DronePatterns.space2,
+		DronePatterns.theta, DronePatterns.space2,
+		DronePatterns.lambda, DronePatterns.space2,
+		DronePatterns.yiota, DronePatterns.space2,
+		DronePatterns.alpha
+	]);
+	swarm.setPattern(pat,-5,3,0);
+}
+let pat3_f = function() {
+	console.log("hello from function 1!");
+	let pat = swarm.compositePattern([
+		DronePatterns.PHI, DronePatterns.space2,
+		DronePatterns.lambda, DronePatterns.space2,
+		DronePatterns.omega, DronePatterns.space2,
+		DronePatterns.rho, DronePatterns.space2,
+		DronePatterns.alpha
+	]);
+	swarm.setPattern(pat,-5,3,0);
+}
+let pat4_happy = function() {
 	let pat = swarm.compositePattern(
-	[DronePatterns.emojiHappy]
-);
-swarm.setPattern(pat,-5,3,0);
+		[DronePatterns.emojiHappy]
+	);
+	swarm.setPattern(pat,0,4,0);
 }
 //swarm.setPattern(pat1,-5,3,0);
 let sequencer = new Sequencer();
-sequencer.push(pat1);
-sequencer.push(pat2); 
+sequencer.push(pat1_kala);
+sequencer.push(pat_forward); //essentially a wait pattern so you can read the word
+sequencer.push(pat2_genethlia);
+sequencer.push(pat_forward);
+sequencer.push(pat3_f);
+sequencer.push(pat_forward);
+sequencer.push(pat4_happy);
 
 //origin.material.color.set(0x00ff00);
 

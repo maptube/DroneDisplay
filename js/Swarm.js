@@ -63,12 +63,18 @@ class Swarm
                 if (line.charAt(i)!='.') {
                     if (drone_num>=this.drones.length) break;
                     this.drones[drone_num].setTarget(px,py,z);
-                    this.drones[drone_num].setLightColour(0x00ff00);
+                    this.drones[drone_num].setLightState(true);
+                    this.drones[drone_num].setLightColour(0xffffff);
                     ++drone_num;
                 }
                 px+=0.25; //spacing .. TODO... implicit!
             }
             py-=0.25; //spacing  IMPLICIT TODO!!!!
+        }
+        //now set the unused ones to off and put them back on the ground
+        for (let i=drone_num; i<this.drones.length; i++) {
+            this.drones[i].setLightState(false);
+            this.drones[i].setTarget(this.drones[i].x,0.1,this.drones[i].z);
         }
     }
 

@@ -24,7 +24,7 @@ class LightDrone {
         this.targetz = z;
         this.isAtTarget=true;
         //threejs objects needed for rendering and scene
-        this.geom = new THREE.SphereGeometry(0.05,16,8);
+        this.geom = new THREE.SphereGeometry(0.08,16,8);
         this.material = new THREE.MeshBasicMaterial({ color: 0xffffff } );
         this.mesh = new THREE.Mesh(this.geom,this.material);
         this.mesh.position.set(this.x,this.y,this.z);
@@ -57,7 +57,7 @@ class LightDrone {
         this.targetx = nx;
         this.targety = ny;
         this.targetz = nz;
-        this.isAtTarget=false;
+        this.isAtTarget=false; //todo: unless target==current pos -> error!???
     }
 
     //same as set target but the dx,dy,dz is a delta on the current position
